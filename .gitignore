@@ -1,6 +1,10 @@
-.classpath
-.project
-.settings/*
-bin/*
-clientConfig.xml
-serverConfig.xml
+/.idea
+/.target
+/.classpath
+/.project
+/.settings/
+/clientConfig.xml
+/serverConfig.xml
+/doc/
+/target/
+/modules/

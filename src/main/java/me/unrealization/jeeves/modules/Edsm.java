@@ -1,80 +1,41 @@
-package modules;
+package me.unrealization.jeeves.modules;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import bot.Jeeves;
-import jsonModels.EdsmModels;
-import apis.EdsmApi;
+import me.unrealization.jeeves.bot.Jeeves;
+import me.unrealization.jeeves.jsonModels.EdsmModels;
+import me.unrealization.jeeves.apis.EdsmApi;
 import sx.blah.discord.handle.obj.IMessage;
-import interfaces.BotCommand;
-import interfaces.BotModule;
+import me.unrealization.jeeves.interfaces.BotCommand;
+import me.unrealization.jeeves.interfaces.BotModule;
 
-public class Edsm implements BotModule
+public class Edsm extends BotModule
 {
-	private String version = "0.1";
-	private String[] commandList;
-
 	public Edsm()
 	{
+		this.version = "0.1";
+
 		this.commandList = new String[2];
 		this.commandList[0] = "GetEDStatus";
 		this.commandList[1] = "Locate";
+
+		this.defaultConfig.put("edsmUseBetaServer", "1");
 	}
 
-	@Override
-	public HashMap<String, String> getDefaultConfig()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getHelp()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getVersion()
-	{
-		return this.version;
-	}
-
-	@Override
-	public String[] getCommands()
-	{
-		return this.commandList;
-	}
-
-	public static class GetEDStatus implements BotCommand
+	public static class GetEDStatus extends BotCommand
 	{
 		@Override
-		public String help()
+		public String getHelp()
 		{
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public String usage()
+		public String getParameters()
 		{
 			// TODO Auto-generated method stub
 			return null;
-		}
-
-		@Override
-		public String[] permissions()
-		{
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean owner()
-		{
-			return false;
 		}
 
 		@Override
@@ -90,7 +51,7 @@ public class Edsm implements BotModule
 			}
 			catch (IOException e)
 			{
-				e.printStackTrace();
+				Jeeves.debugException(e);
 				Jeeves.sendMessage(message.getChannel(), "Cannot retrieve the Elite: Dangerous server status.");
 				return;
 			}
@@ -100,33 +61,20 @@ public class Edsm implements BotModule
 		
 	}
 
-	public static class Locate implements BotCommand
+	public static class Locate extends BotCommand
 	{
 		@Override
-		public String help()
+		public String getHelp()
 		{
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public String usage()
+		public String getParameters()
 		{
 			// TODO Auto-generated method stub
 			return null;
-		}
-
-		@Override
-		public String[] permissions()
-		{
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean owner()
-		{
-			return false;
 		}
 
 		@Override
@@ -149,7 +97,7 @@ public class Edsm implements BotModule
 			}
 			catch (IOException e)
 			{
-				e.printStackTrace();
+				Jeeves.debugException(e);
 				Jeeves.sendMessage(message.getChannel(), "Cannot retrieve the location of " + commanderName);
 				return;
 			}
